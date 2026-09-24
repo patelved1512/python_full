@@ -25,17 +25,22 @@
 .nav-ul .nav-li {
 
     display: inline-block;
+    /* justify-content: center; */
     /* margin: 0 30px; */
+    align-items: center;
+    justify-content: space-between;
 
 }
 
 .nav-li .nav-a {
     text-decoration: none;
     font-size: 21px;
+     /* font-size: clamp(20px, 7.5vw, 89px); */
     font-family: "montserrat";
     font-weight: 100;
     color: black;
     margin: 0 50px;
+    /* justify-content:space-around; */
 
 }
 

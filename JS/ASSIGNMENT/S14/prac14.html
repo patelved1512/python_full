@@ -1,0 +1,19 @@
+<!-- Splitting utility functions into separate files using imports and exports makes a Zomato-like app easier to maintain as it grows from 2 to 20 features. Each file can handle a specific task, such as restaurant searches, payments, cart management, or order tracking. For example, a priceUtils.js file can contain reusable functions for calculating food prices and discounts, which can be imported into both the cart and checkout features. This reduces duplicate code, makes testing easier, and allows developers to update one feature without unnecessarily changing others. -->
+
+<!-- 1.Check the filenames: The filename in the import must match the actual file name exactly.
+
+
+
+2.Check the folder: Keep the importing file and imported file in the same folder when using paths like "./utils.js".
+
+
+
+3.Check package.json: Make sure it contains "type": "module".
+
+
+
+4.Run the correct file: Use node order.js, not node utils.js, because utils.js only defines and exports the function.
+
+
+
+5.Avoid conflicting versions: Questions 1, 3, and 9 use different versions of utils.js. Put each exercise in its own folder if you want to run them all without replacing files. -->

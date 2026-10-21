@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 19 - Mini-Project Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .card-box {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        h2 {
+            margin-top: 0;
+            color: #1a73e8;
+        }
+        form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            padding: 10px 12px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        input[type="text"], input[type="number"] {
+            flex: 1;
+            min-width: 150px;
+        }
+        .btn-submit {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-submit:hover {
+            background-color: #1557b0;
+        }
+        .item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .item-card {
+            background: #f8f9fa;
+            border-left: 4px solid #1a73e8;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .item-actions button {
+            margin-left: 6px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+        .btn-edit {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Session 19: Mini-Project Integration & CRUD</h1>
+
+        <!-- Architecture Flow Diagrams (Tasks 3, 10 & 11) -->
+        <div class="card-box">
+            <h2>Architecture Data Flow (Tasks 3, 10 & 11)</h2>
+            <p>Form, Array ebong UI Display-er moddhe data flow er diagram:</p>
+            <pre>
+[User Input in Form]
+        │
+        ▼ (Submit / Event Listener)
+[JavaScript Object Created]
+        │
+   ┌────┴───────────────────────────┐
+   │                                │
+[Add to Array: .push()]   OR   [Update Array: array[index] = updatedObj]
+   │                                │
+   └────┬───────────────────────────┘
+        ▼
+[Re-render Display Function] ──► Updates DOM (List UI)
+        │
+        ├──► [Edit Click] ──► Pre-fills Form Fields with existing data
+        └──► [Delete Click] ──► array.splice(index, 1) ──► Re-render Display
+            </pre>
+        </div>
+
+        <!-- Spotify Playlist Manager (Tasks 1, 2, 4, 5, 7 & 8) -->
+        <div class="card-box">
+            <h2>Spotify-style Playlist Manager (Tasks 1, 2, 4, 5, 7 & 8)</h2>
+            <form id="playlist-form">
+                <input type="hidden" id="playlist-edit-index" value="-1">
+                <input type="text" id="playlist-name" placeholder="Playlist Name" required>
+                <input type="text" id="playlist-desc" placeholder="Playlist Description" required>
+                <button type="submit" id="playlist-submit-btn" class="btn-submit">Add Playlist</button>
+            </form>
+            <ul id="playlist-list" class="item-list"></ul>
+        </div>
+
+        <!-- Zomato Restaurant Manager (Tasks 6, 9, 12 & 13) -->
+        <div class="card-box">
+            <h2>Zomato-style Restaurant Manager (Tasks 6, 9, 12 & 13)</h2>
+            <form id="resto-form">
+                <input type="hidden" id="resto-edit-index" value="-1">
+                <input type="text" id="resto-name" placeholder="Restaurant Name" required>
+                <input type="text" id="resto-cuisine" placeholder="Cuisine (e.g. Chinese, Indian)" required>
+                <input type="number" id="resto-rating" placeholder="Rating (1-5)" min="1" max="5" step="0.1" required>
+                <button type="submit" id="resto-submit-btn" class="btn-submit">Add Restaurant</button>
+            </form>
+            <ul id="resto-list" class="item-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================================
+        // MODULE 1: Spotify Playlist CRUD (Tasks 1, 2, 4, 5, 7 & 8)
+        // ==========================================================
+        let playlists = [
+            { name: "Chill Vibes", description: "Soft acoustic and indie tracks" }
+        ];
+
+        const playlistForm = document.getElementById('playlist-form');
+        const playlistNameInput = document.getElementById('playlist-name');
+        const playlistDescInput = document.getElementById('playlist-desc');
+        const playlistEditIndex = document.getElementById('playlist-edit-index');
+        const playlistSubmitBtn = document.getElementById('playlist-submit-btn');
+        const playlistList = document.getElementById('playlist-list');
+
+        function renderPlaylists() {
+            playlistList.innerHTML = '';
+            playlists.forEach((playlist, index) => {
+                const li = document.createElement('li');
+                li.className = 'item-card';
+                li.innerHTML = `
+                    <div>
+                        <strong>${playlist.name}</strong>
+                        <p style="margin: 4px 0 0 0; color: #555;">${playlist.description}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-edit" onclick="editPlaylist(${index})">Edit</button>
+                        <button class="btn-delete" onclick="deletePlaylist(${index})">Delete</button>
+                    </div>
+                `;
+                playlistList.appendChild(li);
+            });
+        }
+
+        playlistForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = playlistNameInput.value.trim();
+            const description = playlistDescInput.value.trim();
+            const editIdx = parseInt(playlistEditIndex.value);
+
+            if (editIdx === -1) {
+                // Add new playlist
+                playlists.push({ name, description });
+            } else {
+                // Update existing playlist
+                playlists[editIdx] = { name, description };
+                playlistEditIndex.value = -1;
+                playlistSubmitBtn.textContent = 'Add Playlist';
+            }
+
+            playlistForm.reset();
+            renderPlaylists();
+        });
+
+        function editPlaylist(index) {
+            playlistNameInput.value = playlists[index].name;
+            playlistDescInput.value = playlists[index].description;
+            playlistEditIndex.value = index;
+            playlistSubmitBtn.textContent = 'Update Playlist';
+        }
+
+        function deletePlaylist(index) {
+            playlists.splice(index, 1);
+            renderPlaylists();
+        }
+
+        renderPlaylists();
+
+
+        // ==========================================================
+        // MODULE 2: Zomato Restaurant CRUD (Tasks 6, 9, 12 & 13)
+        // ==========================================================
+        let restaurants = [
+            { name: "Dragon Wok", cuisine: "Chinese", rating: 4.5 }
+        ];
+
+        const restoForm = document.getElementById('resto-form');
+        const restoNameInput = document.getElementById('resto-name');
+        const restoCuisineInput = document.getElementById('resto-cuisine');
+        const restoRatingInput = document.getElementById('resto-rating');
+        const restoEditIndex = document.getElementById('resto-edit-index');
+        const restoSubmitBtn = document.getElementById('resto-submit-btn');
+        const restoList = document.getElementById('resto-list');
+
+        function renderRestaurants() {
+            restoList.innerHTML = '';
+            restaurants.forEach((restaurant, index) => {
+                const li = document.createElement('li');
+                li.className = 'item-card';
+                li.innerHTML = `
+                    <div>
+                        <strong>${restaurant.name}</strong> 
+                        <span style="color: #666;">(${restaurant.cuisine})</span>
+                        <div style="margin-top: 4px; font-weight: bold; color: #ff9800;">★ ${restaurant.rating}</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-edit" onclick="editRestaurant(${index})">Edit</button>
+                        <button class="btn-delete" onclick="deleteRestaurant(${index})">Delete</button>
+                    </div>
+                `;
+                restoList.appendChild(li);
+            });
+        }
+
+        restoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = restoNameInput.value.trim();
+            const cuisine = restoCuisineInput.value.trim();
+            const rating = parseFloat(restoRatingInput.value);
+            const editIdx = parseInt(restoEditIndex.value);
+
+            if (editIdx === -1) {
+                // Task 6: Collect form data and store entry in array
+                restaurants.push({ name, cuisine, rating });
+            } else {
+                // Task 13: Save changes back to array and UI
+                restaurants[editIdx] = { name, cuisine, rating };
+                restoEditIndex.value = -1;
+                restoSubmitBtn.textContent = 'Add Restaurant';
+            }
+
+            restoForm.reset();
+            renderRestaurants(); // Task 9: Display updated list
+        });
+
+        // Task 13: Pre-fill form with restaurant details for editing
+        function editRestaurant(index) {
+            const target = restaurants[index];
+            restoNameInput.value = target.name;
+            restoCuisineInput.value = target.cuisine;
+            restoRatingInput.value = target.rating;
+            restoEditIndex.value = index;
+            restoSubmitBtn.textContent = 'Update Restaurant';
+        }
+
+        // Task 12: Remove from array using splice() and re-render list
+        function deleteRestaurant(index) {
+            restaurants.splice(index, 1);
+            renderRestaurants();
+        }
+
+        renderRestaurants();
+    </script>
+</body>
+</html>

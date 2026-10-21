@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+        fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: "Learning JavaScript Fetch",
+                body: "Practicing POST requests with JavaScript.",
+                userId: 1
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Response object:", data);
+
+                if ("id" in data) {
+                    console.log("ID is present:", data.id);
+                } else {
+                    console.log("ID is missing");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+
+    </script>
+
+
+</body>
+
+</html>

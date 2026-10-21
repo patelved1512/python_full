@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h3>Product: Nike Shoes</h3>
+
+    <button id="cart">Add to Cart</button>
+
+    <h3>My Cart</h3>
+    <ul id="cart-list"></ul>
+
+    <script>
+        function addToCart() {
+            let li = document.createElement("li");
+            li.innerHTML = "Nike Shoes";
+
+            document.querySelector("#cart-list").appendChild(li);
+        }
+
+        document.querySelector("#cart").addEventListener("click", addToCart);
+    </script>
+
+</body>
+</html>

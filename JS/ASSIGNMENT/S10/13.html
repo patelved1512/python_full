@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add to Cart</title>
+</head>
+<body>
+
+    <h2>Shopping Cart Total</h2>
+
+    <script>
+        const addToCartArrow = (...prices) => {
+            let total = 0;
+
+            for (let i = 0; i < prices.length; i++) {
+                total = total + prices[i];
+            }
+
+            return total;
+        };
+
+        console.log(addToCartArrow(100, 200, 300));
+        console.log(addToCartArrow(500, 100, 250, 150));
+    </script>
+
+</body>
+</html>

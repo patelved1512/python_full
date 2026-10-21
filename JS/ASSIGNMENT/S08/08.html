@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remove Playlist</title>
+</head>
+<body>
+
+    <h2>Remove Last Playlist</h2>
+
+    <script>
+        let playlists = [
+            { name: "Romantic Hits", creator: "Badal", numberOfSongs: 25 },
+            { name: "Workout Mix", creator: "Rahul", numberOfSongs: 30 },
+            { name: "Chill Vibes", creator: "Amit", numberOfSongs: 20 }
+        ];
+
+        let removedPlaylist = playlists.pop();
+
+        console.log("Removed Playlist:", removedPlaylist);
+        console.log("Updated Array:", playlists);
+    </script>
+
+</body>
+</html>

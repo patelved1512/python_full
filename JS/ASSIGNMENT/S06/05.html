@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input type="text" placeholder="Enter song name">
+    <button onclick="addSong()">Add Song</button>
+
+    <ul id="playlist"></ul>
+
+    <script>
+        function addSong() {
+            let song = document.querySelector("input").value;
+
+            let li = document.createElement("li");
+            li.innerHTML = song;
+
+            document.getElementById("playlist").appendChild(li);
+        }
+    </script>
+
+</body>
+</html>

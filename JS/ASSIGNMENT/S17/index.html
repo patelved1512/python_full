@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 17 - Event Delegation & Dynamic UI Updates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .section-box {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn-add {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+        .btn-add:hover {
+            background-color: #218838;
+        }
+        .card, .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            background: #eef2f7;
+            border-radius: 4px;
+            transition: opacity 0.4s ease;
+        }
+        .btn-remove, .btn-close {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-close {
+            background: transparent;
+            color: #777;
+            font-size: 18px;
+            line-height: 1;
+        }
+        .btn-close:hover {
+            color: #dc3545;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Session 17: Event Delegation Tasks</h1>
+
+    <!-- Tasks 1, 2, 3: Song Cards & Favorite Songs List -->
+    <div class="section-box">
+        <h2>Tasks 1, 2 & 3: Song Cards (Event Delegation)</h2>
+        <div id="songs-container">
+            <div class="card">
+                <span>Song 1: Bohemian Rhapsody</span>
+                <button class="btn-close" title="Remove">&times;</button>
+            </div>
+            <div class="card">
+                <span>Song 2: Hotel California</span>
+                <button class="btn-close" title="Remove">&times;</button>
+            </div>
+            <div class="card">
+                <span>Song 3: Imagine</span>
+                <button class="btn-close" title="Remove">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tasks 4, 5, 6 & 9: Flipkart Wishlist / Shopping Cart UI -->
+    <div class="section-box">
+        <h2>Tasks 4, 5, 6 & 9: Flipkart Shopping Cart / Wishlist</h2>
+        <button id="add-product-btn" class="btn-add">+ Add Random Product</button>
+        <div id="cart-container">
+            <div class="card">
+                <span>Redmi Note 12 - ₹14,999</span>
+                <button class="btn-remove">Remove</button>
+            </div>
+            <div class="card">
+                <span>Boat Rockerz 450 - ₹1,499</span>
+                <button class="btn-remove">Remove</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tasks 7 & 8: Instagram Story Cards -->
+    <div class="section-box">
+        <h2>Tasks 7 & 8: Instagram Story Cards</h2>
+        <div id="story-container">
+            <div class="card">
+                <span>Story by @alex</span>
+                <button class="btn-close">&times;</button>
+            </div>
+            <div class="card">
+                <span>Story by @johndoe</span>
+                <button class="btn-close">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tasks 10 & 11: YouTube Notification Feed with Fade Out -->
+    <div class="section-box">
+        <h2>Tasks 10 & 11: YouTube Notification Feed (Fade Out Dismiss)</h2>
+        <button id="add-notif-btn" class="btn-add">+ Simulate Incoming Notification</button>
+        <div id="notif-feed">
+            <div class="card">
+                <span>New video uploaded by Coding Channel</span>
+                <button class="btn-remove dismiss-btn">Dismiss</button>
+            </div>
+            <div class="card">
+                <span>Someone commented on your post</span>
+                <button class="btn-remove dismiss-btn">Dismiss</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================================
+        // Task 1, 2 & 3: Song Cards using Event Delegation
+        // ==========================================================
+        const songsContainer = document.getElementById('songs-container');
+        songsContainer.addEventListener('click', function(event) {
+            // Check if the clicked target is the remove button ('X')
+            if (event.target.classList.contains('btn-close')) {
+                const card = event.target.closest('.card');
+                if (card) {
+                    card.remove();
+                }
+            }
+        });
+
+
+        // ==========================================================
+        // Task 4, 5, 6 & 9: Flipkart Cart & Wishlist with Dynamic Addition
+        // ==========================================================
+        const cartContainer = document.getElementById('cart-container');
+        const addProductBtn = document.getElementById('add-product-btn');
+
+        // Single event listener on parent container (Event Delegation)
+        cartContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('btn-remove')) {
+                const card = event.target.closest('.card');
+                if (card) {
+                    card.remove();
+                }
+            }
+        });
+
+        // Dynamic Product Add
+        let productCount = 1;
+        addProductBtn.addEventListener('click', function() {
+            const newCard = document.createElement('div');
+            newCard.className = 'card';
+            newCard.innerHTML = `
+                <span>New Product #${productCount++} - ₹${Math.floor(Math.random() * 5000 + 500)}</span>
+                <button class="btn-remove">Remove</button>
+            `;
+            cartContainer.appendChild(newCard);
+        });
+
+
+        // ==========================================================
+        // Task 7 & 8: Instagram Story Cards (Single Parent Listener)
+        // ==========================================================
+        const storyContainer = document.getElementById('story-container');
+        storyContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('btn-close')) {
+                const card = event.target.closest('.card');
+                if (card) {
+                    card.remove();
+                }
+            }
+        });
+
+
+        // ==========================================================
+        // Task 10 & 11: YouTube Notification Feed with Fade Out Animation
+        // ==========================================================
+        const notifFeed = document.getElementById('notif-feed');
+        const addNotifBtn = document.getElementById('add-notif-btn');
+
+        // Dismiss with smooth fade-out using Event Delegation
+        notifFeed.addEventListener('click', function(event) {
+            if (event.target.classList.contains('dismiss-btn')) {
+                const card = event.target.closest('.card');
+                if (card) {
+                    card.classList.add('fade-out');
+                    setTimeout(() => {
+                        card.remove();
+                    }, 400); // 400ms transition seshe remove hobe
+                }
+            }
+        });
+
+        // Add dynamic notification
+        let notifIndex = 1;
+        addNotifBtn.addEventListener('click', function() {
+            const newNotif = document.createElement('div');
+            newNotif.className = 'card';
+            newNotif.innerHTML = `
+                <span>Live stream started: Stream #${notifIndex++}</span>
+                <button class="btn-remove dismiss-btn">Dismiss</button>
+            `;
+            notifFeed.appendChild(newNotif);
+        });
+
+
+        // ==========================================================
+        // Task 12: Bug Fix Demonstration
+        // ----------------------------------------------------------
+        // Old buggy snippet:
+        // document.querySelectorAll('.remove-btn').forEach(btn => {
+        //     btn.addEventListener('click', function() { this.parentElement.remove(); });
+        // });
+        //
+        // Fixed via Event Delegation:
+        // parentContainer.addEventListener('click', function(event) {
+        //     if (event.target.classList.contains('remove-btn')) {
+        //         event.target.closest('.card').remove();
+        //     }
+        // });
+        // ==========================================================
+        console.log("Session 17 scripts loaded successfully with Event Delegation!");
+    </script>
+</body>
+</html>

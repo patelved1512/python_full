@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Spotify Playlist Buttons</title>
+</head>
+
+<body>
+    <h2>🎵 My Spotify Playlist</h2>
+
+    <script>
+        function createPlaylistButton(songName, themeColor) {
+            let button = document.createElement("button");
+
+            button.textContent = songName;
+            button.style.backgroundColor = themeColor;
+            button.style.color = "white";
+            button.style.padding = "12px 20px";
+            button.style.margin = "8px";
+            button.style.border = "none";
+            button.style.borderRadius = "20px";
+            button.style.cursor = "pointer";
+            button.style.fontSize = "16px";
+
+            return button;
+        }
+
+       
+        let song1 = createPlaylistButton("Perfect", "#1DB954");
+        let song2 = createPlaylistButton("Blinding Lights", "#E91E63");
+        let song3 = createPlaylistButton("Believer", "#673AB7");
+
+        document.body.appendChild(song1);
+        document.body.appendChild(song2);
+        document.body.appendChild(song3);
+    </script>
+</body>
+
+</html>

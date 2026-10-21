@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 16 - Advanced Array Methods</title>
+</head>
+<body>
+    <h1>Session 16: Advanced Array Methods Tasks</h1>
+
+    <script>
+        // ==========================================
+        // Task 1 & 2: filter() - Flipkart In-stock Products
+        // ==========================================
+        console.log("--- Task 1 & 2: filter() in-stock products ---");
+        const flipkartProducts = [
+            { name: "Laptop", price: 55000, isInStock: true },
+            { name: "Headphones", price: 2000, isInStock: false },
+            { name: "Smartphone", price: 25000, isInStock: true },
+            { name: "Mouse", price: 500, isInStock: false }
+        ];
+
+        const inStockProducts = flipkartProducts.filter(product => product.isInStock);
+        console.log("In-Stock Products:", inStockProducts);
+
+
+        // ==========================================
+        // Task 3: filter() - Spotify Public Playlists
+        // ==========================================
+        console.log("\n--- Task 3: filter() public playlists ---");
+        const spotifyPlaylists = [
+            { name: "Chill Vibes", isPublic: true },
+            { name: "My Private Diary", isPublic: false },
+            { name: "Gym Workout", isPublic: true },
+            { name: "Sleep Sounds", isPublic: false }
+        ];
+
+        const publicPlaylists = spotifyPlaylists.filter(playlist => playlist.isPublic);
+        console.log("Public Playlists:", publicPlaylists);
+
+
+        // ==========================================
+        // Task 4 & 5: map() - Instagram Likes Array
+        // ==========================================
+        console.log("\n--- Task 4 & 5: map() Instagram likes ---");
+        const instaPosts = [
+            { id: 1, likes: 120 },
+            { id: 2, likes: 450 },
+            { id: 3, likes: 890 }
+        ];
+
+        const likeCounts = instaPosts.map(post => post.likes);
+        console.log("Like Counts:", likeCounts);
+
+
+        // ==========================================
+        // Task 6: map() - Formatted Strings for Flipkart Products
+        // ==========================================
+        console.log("\n--- Task 6: map() product format string ---");
+        const formattedProducts = flipkartProducts.map(p => `Product: ${p.name}, Price: ₹${p.price}`);
+        console.log("Formatted Products:", formattedProducts);
+
+
+        // ==========================================
+        // Task 7 & 8: reduce() - Zomato Orders Total Clicks
+        // ==========================================
+        console.log("\n--- Task 7 & 8: reduce() total clicks ---");
+        const zomatoOrders = [
+            { orderId: 101, clicks: 5 },
+            { orderId: 102, clicks: 12 },
+            { orderId: 103, clicks: 8 }
+        ];
+
+        const totalClicks = zomatoOrders.reduce((acc, order) => acc + order.clicks, 0);
+        console.log("Total Clicks:", totalClicks);
+
+
+        // ==========================================
+        // Task 9: reduce() - Total Instagram Likes
+        // ==========================================
+        console.log("\n--- Task 9: reduce() total likes ---");
+        const totalLikes = instaPosts.reduce((acc, post) => acc + post.likes, 0);
+        console.log("Total Likes:", totalLikes);
+
+
+        // ==========================================
+        // Task 10 & 11: find() - YouTube Video > 1M Views
+        // ==========================================
+        console.log("\n--- Task 10 & 11: find() video > 1M views ---");
+        const ytVideos = [
+            { title: "JS Tutorial", views: 250000 },
+            { title: "Trending Music Video", views: 2400000 },
+            { title: "Cooking Vlog", views: 1500000 }
+        ];
+
+        const popularVideo = ytVideos.find(video => video.views > 1000000);
+        console.log("First Video with > 1M views:", popularVideo);
+
+
+        // ==========================================
+        // Task 12: find() - Zomato Chinese Restaurant
+        // ==========================================
+        console.log("\n--- Task 12: find() Chinese restaurant ---");
+        const restaurants = [
+            { name: "Pasta House", cuisine: "Italian" },
+            { name: "Dragon Wok", cuisine: "Chinese" },
+            { name: "Spice Village", cuisine: "Indian" },
+            { name: "Noodle Bar", cuisine: "Chinese" }
+        ];
+
+        const chineseRestaurant = restaurants.find(resto => resto.cuisine === 'Chinese');
+        console.log("First Chinese Restaurant:", chineseRestaurant);
+
+
+        // ==========================================
+        // Task 13 & 14: One-liner map() + reduce() for Myntra Cart Total
+        // ==========================================
+        console.log("\n--- Task 13 & 14: One-liner Myntra cart total ---");
+        const myntraCart = [
+            { item: "T-Shirt", price: 799 },
+            { item: "Jeans", price: 1999 },
+            { item: "Sneakers", price: 2499 }
+        ];
+
+        // One-liner implementation:
+        const totalCartPrice = myntraCart.map(item => item.price).reduce((acc, price) => acc + price, 0);
+        console.log("Total Cart Price (₹):", totalCartPrice);
+
+
+        // ==========================================
+        // Task 15: One-liner map() + reduce() for Total Spent
+        // ==========================================
+        console.log("\n--- Task 15: One-liner total spent on transactions ---");
+        const transactions = [
+            { id: "T1", amount: 150 },
+            { id: "T2", amount: 320 },
+            { id: "T3", amount: 80 }
+        ];
+
+        // One-liner implementation:
+        const totalSpent = transactions.map(t => t.amount).reduce((acc, amt) => acc + amt, 0);
+        console.log("Total Amount Spent:", totalSpent);
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function placeOrder(foodItem, callback) {
+            console.log("Order placed for " + foodItem);
+
+            setTimeout(function () {
+                callback("Your " + foodItem + " is being prepared");
+            }, 1000);
+        }
+
+        placeOrder("Pizza", function (message) {
+            console.log(message);
+        });
+
+
+        // Fetch song lyrics using a callback
+
+
+        function fetchSongLyrics(song, callback) {
+            setTimeout(function () {
+                const lyrics = "These are the simulated lyrics for " + song;
+                callback(lyrics);
+            }, 1500);
+        }
+
+        fetchSongLyrics("Perfect", function (lyrics) {
+            console.log(lyrics);
+        });
+
+        // Get a random Instagram follower count using a Promise
+
+
+        const getFollowersCount = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                const followers = Math.floor(
+                    Math.random() * 4001
+                ) + 1000;
+
+                resolve(followers);
+            }, 1000);
+        });
+
+        getFollowersCount.then(function (count) {
+            console.log("You have " + count + " new followers");
+        });
+
+        // Check order status using a Promise
+
+
+        function getOrderStatus(orderId) {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    if (orderId % 2 === 0) {
+                        resolve("Order delivered");
+                    } else {
+                        reject("Order not found");
+                    }
+                }, 1500);
+            });
+        }
+
+        // Test with an even order ID
+        getOrderStatus(102)
+            .then(function (message) {
+                console.log(message);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        // Test with an odd order ID
+        getOrderStatus(103)
+            .then(function (message) {
+                console.log(message);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+    </script>
+</body>
+
+</html>

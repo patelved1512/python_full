@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Push and Pop</title>
+</head>
+<body>
+
+    <h2>Push and Pop Playlists</h2>
+
+    <script>
+        let playlists = [
+            { name: "Romantic Hits", creator: "Badal", numberOfSongs: 25 },
+            { name: "Workout Mix", creator: "Rahul", numberOfSongs: 30 }
+        ];
+
+        playlists.push({
+            name: "Punjabi Hits",
+            creator: "Aman",
+            numberOfSongs: 35
+        });
+
+        console.log("After push:", playlists);
+
+        playlists.pop();
+
+        console.log("After pop:", playlists);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div id="box"
+         style="width:300px; height:200px; background-color:lightblue;">
+        Click anywhere inside this box
+    </div>
+
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("box").addEventListener("click", function(event) {
+            document.getElementById("result").innerHTML =
+                "X: " + event.clientX + ", Y: " + event.clientY;
+        });
+    </script>
+
+</body>
+</html>

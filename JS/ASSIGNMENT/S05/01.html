@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>Spotify Button</title>
+    </head>
+
+    <body>
+
+        <script>
+            function createSpotifyButton(label, color) {
+                let button = document.createElement("button");
+                button.textContent = label;
+                button.style.backgroundColor = color;
+                button.style.color = "white";
+                button.style.padding = "10px 20px";
+                button.style.border = "none";
+                button.style.borderRadius = "20px";
+                button.style.cursor = "pointer";
+
+                return button;
+            }
+
+            let spotifyButton = createSpotifyButton("Play on Spotify", "green");
+            document.body.appendChild(spotifyButton);
+        </script>
+
+    </body>
+
+    </html>
+</body>
+
+</html>

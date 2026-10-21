@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Splice Playlist</title>
+</head>
+<body>
+
+    <h2>Replace Playlist</h2>
+
+    <script>
+        let playlists = [
+            { name: "Romantic Hits", creator: "Badal", numberOfSongs: 25 },
+            { name: "Workout Mix", creator: "Rahul", numberOfSongs: 30 },
+            { name: "Chill Vibes", creator: "Amit", numberOfSongs: 20 }
+        ];
+
+        playlists.splice(1, 1, {
+            name: "Bollywood Hits",
+            creator: "Jay",
+            numberOfSongs: 45
+        });
+
+        console.log(playlists);
+    </script>
+
+</body>
+</html>

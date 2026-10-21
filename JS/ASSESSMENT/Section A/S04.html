@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Function Declaration
+        function calculateGST1(price, itemType) {
+            if (itemType === "food") {
+                return price * 0.05;
+            } else if (itemType === "beverage") {
+                return price * 0.18;
+            }
+            return 0;
+        }
+
+        console.log("Function Declaration:", calculateGST1(500, "food"));
+
+
+
+        const calculateGST2 = function (price, itemType) {
+            if (itemType === "food") {
+                return price * 0.05;
+            } else if (itemType === "beverage") {
+                return price * 0.18;
+            }
+            return 0;
+        };
+
+        console.log("Function Expression:", calculateGST2(200, "beverage"));
+
+
+
+        const calculateGST3 = (price, itemType) => {
+            if (itemType === "food") {
+                return price * 0.05;
+            } else if (itemType === "beverage") {
+                return price * 0.18;
+            }
+            return 0;
+        };
+
+        console.log("Arrow Function:", calculateGST3(1000, "food"));
+    </script>
+</body>
+
+</html>

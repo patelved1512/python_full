@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        const productJSON = '{"name":"Shoes","price":999}';
+        // const productJSON = '{"name":"Shoes", price:999}';
+
+        try {
+            const product = JSON.parse(productJSON);
+            console.log("Product:", product);
+        } catch (error) {
+            console.log("Invalid product data");
+        } finally {
+            console.log("Parsing attempt finished");
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const dishes = [
+            { name: "Paneer Tikka", vegetarian: true },
+            { name: "Chicken Biryani", vegetarian: false },
+            { name: "Veg Pizza", vegetarian: true },
+            { name: "Fish Curry", vegetarian: false }
+        ];
+
+    
+        for (const dish of dishes) {
+            console.log(dish.name);
+        }
+
+        
+        let vegetarianCount = 0;
+
+        dishes.forEach(function (dish) {
+            if (dish.vegetarian) {
+                vegetarianCount++;
+            }
+        });
+
+        console.log("Total vegetarian dishes:", vegetarianCount);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button onclick="addSong()">Add Song</button>
+
+    <div id="songs"></div>
+
+    <script>
+        function addSong() {
+            let songs = ["Kesariya", "Heeriye", "Apna Bana Le"];
+
+            let random = Math.floor(Math.random() * songs.length);
+
+            let card = document.createElement("div");
+            card.innerHTML = songs[random];
+
+            card.style.border = "1px solid black";
+            card.style.padding = "10px";
+            card.style.margin = "10px";
+
+            document.getElementById("songs").appendChild(card);
+        }
+    </script>
+
+</body>
+</html>

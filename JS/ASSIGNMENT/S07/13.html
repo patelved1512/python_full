@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button id="cart">Add to Cart</button>
+
+    <script>
+        let button = document.getElementById("cart");
+
+        button.addEventListener("click", function(event) {
+            console.log("Event:", event.type);
+            console.log("X:", event.clientX);
+            console.log("Y:", event.clientY);
+        });
+
+        button.addEventListener("mouseover", function(event) {
+            console.log("Event:", event.type);
+            console.log("X:", event.clientX);
+            console.log("Y:", event.clientY);
+        });
+    </script>
+
+</body>
+</html>

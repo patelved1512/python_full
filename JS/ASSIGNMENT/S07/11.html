@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div class="movie">
+        <span>3 Idiots</span>
+        <button class="remove">Remove</button>
+    </div>
+
+    <div class="movie">
+        <span>Chennai Express</span>
+        <button class="remove">Remove</button>
+    </div>
+
+    <div class="movie">
+        <span>Jawan</span>
+        <button class="remove">Remove</button>
+    </div>
+
+    <script>
+        let buttons = document.querySelectorAll(".remove");
+
+        buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                button.parentElement.remove();
+            });
+        });
+    </script>
+
+</body>
+</html>

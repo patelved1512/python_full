@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Wishlist</title>
+</head>
+<body>
+
+    <h2>My Wishlist</h2>
+
+    <ul id="wishlist"></ul>
+
+    <button onclick="clearWishlist()">Clear Wishlist</button>
+
+    <script>
+        let products = [
+            { name: "Nike Shoes", price: 2500 },
+            { name: "Smart Watch", price: 1800 },
+            { name: "Headphones", price: 1200 }
+        ];
+
+        if (localStorage.getItem("wishlist") == null) {
+            localStorage.setItem("wishlist", JSON.stringify(products));
+        }
+
+        function displayWishlist() {
+            let saved = JSON.parse(
+                localStorage.getItem("wishlist")
+            ) || [];
+
+            let list = document.getElementById("wishlist");
+            list.innerHTML = "";
+
+            for (let i = 0; i < saved.length; i++) {
+                let li = document.createElement("li");
+
+                li.innerHTML = saved[i].name + " - ₹" + saved[i].price;
+
+                list.appendChild(li);
+            }
+        }
+
+        function clearWishlist() {
+            localStorage.removeItem("wishlist");
+            displayWishlist();
+        }
+
+        displayWishlist();
+    </script>
+
+</body>
+</html>

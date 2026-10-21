@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Classes and OOP Tasks</title>
+</head>
+<body>
+    <h1>JavaScript Classes & OOP Tasks</h1>
+    <script>
+        // ==========================================
+        // Task 1, 2, 3, 4, 5, 6 & 12: Playlist Class
+        // ==========================================
+        console.log("--- PLAYLIST TASKS ---");
+
+        class Playlist {
+            // Task 1, 2, 3: Constructor accepting name and songs array
+            constructor(name, songs = []) {
+                this.name = name;
+                this.songs = songs;
+            }
+
+            // Task 4, 5: displayPlaylist method
+            displayPlaylist() {
+                console.log(`Playlist: ${this.name} | Songs: ${this.songs.join(", ")}`);
+            }
+
+            // Task 6: getSongCount method
+            getSongCount() {
+                return this.songs.length;
+            }
+
+            // Task 12: addSong method
+            addSong(songName) {
+                this.songs.push(songName);
+            }
+        }
+
+        // Task 1 & 2: Instance 'Chill Vibes' with 3 songs
+        const chillVibes = new Playlist("Chill Vibes", ["Song A", "Song B", "Song C"]);
+        console.log("Task 1 & 2 Instance:", chillVibes);
+
+        // Task 3: Favorite playlist instance
+        const myFavPlaylist = new Playlist("Retro Hits", ["Hotel California", "Imagine", "Bohemian Rhapsody"]);
+        console.log("Task 3 Instance:", myFavPlaylist);
+
+        // Task 4 & 5: Testing displayPlaylist()
+        chillVibes.displayPlaylist();
+
+        // Task 6: Testing getSongCount()
+        console.log(`Total songs in Chill Vibes: ${chillVibes.getSongCount()}`);
+
+        // Task 12: Adding two songs and displaying updated playlist
+        chillVibes.addSong("Song D");
+        chillVibes.addSong("Song E");
+        console.log("After adding 2 songs:");
+        chillVibes.displayPlaylist();
+
+
+        // ==========================================
+        // Task 7, 8, 9 & 13: FlipkartProduct Class
+        // ==========================================
+        console.log("\n--- FLIPKART PRODUCT TASKS ---");
+
+        class FlipkartProduct {
+            // Task 7, 8, 9: Properties title, price, and rating
+            constructor(title, price, rating) {
+                this.title = title;
+                this.price = price;
+                this.rating = rating;
+            }
+
+            // Task 7, 8: getDiscountedPrice method
+            getDiscountedPrice(discountPercent) {
+                return this.price - (this.price * discountPercent / 100);
+            }
+
+            // Task 13: Refactored/renamed from displayDetails() to showProductInfo()
+            showProductInfo() {
+                // Task 9 format: 'Redmi Note 12 Pro - ₹18999 - 4.5 ⭐'
+                console.log(`${this.title} - ₹${this.price} - ${this.rating} ⭐`);
+            }
+        }
+
+        // Testing FlipkartProduct
+        const product1 = new FlipkartProduct("Redmi Note 12 Pro", 18999, 4.5);
+        product1.showProductInfo(); // Task 13 updated call
+
+        const discount = 10; // 10% discount
+        const discountedPrice = product1.getDiscountedPrice(discount);
+        console.log(`Price after ${discount}% discount: ₹${discountedPrice}`);
+
+
+        // ==========================================
+        // Task 10 & 11: Refactoring Movie Constructor to Class
+        // ==========================================
+        console.log("\n--- MOVIE CLASS REFACTOR (TASKS 10 & 11) ---");
+
+        class Movie {
+            constructor(title, genre) {
+                this.title = title;
+                this.genre = genre;
+            }
+
+            display() {
+                console.log(this.title + ' - ' + this.genre);
+            }
+        }
+
+        // Testing Movie Class
+        const movie1 = new Movie("Inception", "Sci-Fi");
+        movie1.display();
+    </script>
+</body>
+</html>

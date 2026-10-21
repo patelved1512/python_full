@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // callback version
+
+
+        const product = [
+            "iPhone 16",
+            "Samsung Galaxy S25",
+            "iPhone 15",
+            "OnePlus 13",
+            "Samsung Galaxy A55"
+        ];
+
+        function searchProductsCallback(product, searchTerm, callback) {
+            setTimeout(function () {
+                const results = product.filter(function (product) {
+                    return product.toLowerCase().includes(
+                        searchTerm.toLowerCase()
+                    );
+                });
+
+                callback(results);
+            }, 1000);
+        }
+
+        searchProductsCallback(product, "iPhone", function (results) {
+            console.log("Callback results:", results);
+        });
+
+        // promise version
+
+
+        const products = [
+            "iPhone 16",
+            "Samsung Galaxy S25",
+            "iPhone 15",
+            "OnePlus 13",
+            "Samsung Galaxy A55"
+        ];
+
+        function searchProductsPromise(products, searchTerm) {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    const results = products.filter(function (product) {
+                        return product.toLowerCase().includes(
+                            searchTerm.toLowerCase()
+                        );
+                    });
+
+                    resolve(results);
+                }, 1000);
+            });
+        }
+
+        searchProductsPromise(product, "Samsung")
+            .then(function (results) {
+                console.log("Promise results:", results);
+            })
+            .catch(function (error) {
+                console.log("Error:", error);
+            });
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Recent Searches</title>
+</head>
+<body>
+
+    <h2>Recent Searches</h2>
+
+    <script>
+        function getRecentSearches() {
+            let data = localStorage.getItem("recentSearches");
+
+            if (data == null) {
+                return [];
+            }
+
+            return JSON.parse(data);
+        }
+
+        console.log(getRecentSearches());
+    </script>
+
+</body>
+</html>

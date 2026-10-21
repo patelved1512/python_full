@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <select onchange="selectCuisine(this.value)">
+        <option value="">Select Cuisine</option>
+        <option value="Gujarati">Gujarati</option>
+        <option value="Punjabi">Punjabi</option>
+        <option value="Chinese">Chinese</option>
+        <option value="South Indian">South Indian</option>
+    </select>
+
+    <input type="number" placeholder="Enter Quantity">
+
+    <p id="message"></p>
+
+    <script>
+        function selectCuisine(cuisine) {
+            document.getElementById("message").innerHTML =
+                "You selected " + cuisine + " cuisine.";
+        }
+    </script>
+
+</body>
+</html>

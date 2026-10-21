@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Place Order</title>
+</head>
+
+<body>
+
+    <h2>Food Delivery Order</h2>
+
+    <form id="orderForm">
+        <label>Select Dish:</label>
+        <select id="dish">
+            <option value="">Select a dish</option>
+            <option value="Pizza">Pizza</option>
+            <option value="Burger">Burger</option>
+            <option value="Pasta">Pasta</option>
+        </select>
+
+        <br><br>
+
+        <label>Delivery Address:</label>
+        <input type="text" id="address" placeholder="Enter your address">
+
+        <br><br>
+
+        <button type="submit">Place Order</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        const orderForm = document.getElementById("orderForm");
+
+        orderForm.addEventListener("submit", function (event) {
+
+
+            event.preventDefault();
+
+            const dish = document.getElementById("dish").value;
+            const address = document.getElementById("address").value.trim();
+            const message = document.getElementById("message");
+
+
+            if (dish === "" || address === "") {
+                message.textContent =
+                    "Please select a dish and enter your delivery address.";
+                message.style.color = "red";
+            } else {
+                message.textContent =
+                    "Order placed successfully!";
+                message.style.color = "green";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

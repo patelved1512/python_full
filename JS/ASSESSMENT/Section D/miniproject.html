@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Favourites App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff5722;
+            text-align: center;
+        }
+
+        #loading {
+            text-align: center;
+            color: blue;
+        }
+
+        #error {
+            color: red;
+            text-align: center;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            background: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e64a19;
+        }
+
+        .favourite {
+            background: #d4edda;
+            border: 2px solid green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🍔 Food Favourites App</h1>
+
+    <p id="loading">Loading food items...</p>
+    <p id="error"></p>
+
+    <ul id="food-list"></ul>
+
+    <script>
+        const API_URL =
+            "https://jsonplaceholder.typicode.com/posts";
+
+        const foodList = document.getElementById("food-list");
+        const loading = document.getElementById("loading");
+        const error = document.getElementById("error");
+
+
+        let favourites = [];
+
+        try {
+            favourites = JSON.parse(
+                localStorage.getItem("favourites") || "[]"
+            );
+
+            if (!Array.isArray(favourites)) {
+                favourites = [];
+            }
+        } catch (err) {
+            favourites = [];
+        }
+
+        let foodItems = [];
+
+
+        async function fetchFoods() {
+            loading.style.display = "block";
+            error.textContent = "";
+
+            try {
+                const response = await fetch(API_URL);
+
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch food items");
+                }
+
+                foodItems = await response.json();
+
+                displayFoods();
+
+            } catch (err) {
+                error.textContent =
+                    "Unable to load food items. Please try again.";
+
+            } finally {
+                loading.style.display = "none";
+            }
+        }
+
+
+        function displayFoods() {
+            foodList.innerHTML = "";
+
+            foodItems.forEach(function (food) {
+                const li = document.createElement("li");
+
+                const foodName = document.createElement("span");
+                foodName.textContent = food.title;
+
+                const button = document.createElement("button");
+
+                const isFavourite = favourites.includes(food.id);
+
+                button.textContent = isFavourite
+                    ? "Remove Favourite"
+                    : "Add to Favourites";
+
+                if (isFavourite) {
+                    li.classList.add("favourite");
+                }
+
+                button.addEventListener("click", function () {
+                    toggleFavourite(food.id);
+                });
+
+                li.appendChild(foodName);
+                li.appendChild(button);
+
+                foodList.appendChild(li);
+            });
+        }
+
+
+        function toggleFavourite(id) {
+            if (favourites.includes(id)) {
+                favourites = favourites.filter(function (item) {
+                    return item !== id;
+                });
+            } else {
+                favourites.push(id);
+            }
+
+            localStorage.setItem(
+                "favourites",
+                JSON.stringify(favourites)
+            );
+
+            displayFoods();
+        }
+
+
+        fetchFoods();
+    </script>
+
+</body>
+
+</html>

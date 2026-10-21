@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Channels</title>
+</head>
+<body>
+
+    <h2>Favorite Channels</h2>
+
+    <script>
+        function getChannelNames(jsonString) {
+            let channels = JSON.parse(jsonString);
+
+            let names = [];
+
+            for (let i = 0; i < channels.length; i++) {
+                names.push(channels[i].name);
+            }
+
+            return names;
+        }
+
+        let data = '[{"name":"MrBeast"},{"name":"Technical Guruji"},{"name":"CodeWithHarry"}]';
+
+        console.log(getChannelNames(data));
+    </script>
+
+</body>
+</html>

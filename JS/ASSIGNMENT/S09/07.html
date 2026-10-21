@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorite Restaurants</title>
+</head>
+<body>
+
+    <h2>My Favorite Restaurants</h2>
+
+    <input type="text" id="restaurant" placeholder="Restaurant name">
+    <button onclick="addRestaurant()">Add Restaurant</button>
+
+    <ul id="restaurantList"></ul>
+
+    <script>
+        let restaurants = JSON.parse(
+            localStorage.getItem("restaurants")
+        ) || [];
+
+        function displayRestaurants() {
+            document.getElementById("restaurantList").innerHTML = "";
+
+            for (let i = 0; i < restaurants.length; i++) {
+                let li = document.createElement("li");
+                li.innerHTML = restaurants[i];
+
+                document.getElementById("restaurantList").appendChild(li);
+            }
+        }
+
+        function addRestaurant() {
+            let name = document.getElementById("restaurant").value;
+
+            if (name == "" || restaurants.length >= 3) {
+                alert("Enter a name. Maximum 3 restaurants allowed.");
+                return;
+            }
+
+            restaurants.push(name);
+
+            localStorage.setItem(
+                "restaurants",
+                JSON.stringify(restaurants)
+            );
+
+            document.getElementById("restaurant").value = "";
+
+            displayRestaurants();
+        }
+
+        displayRestaurants();
+    </script>
+
+</body>
+</html>

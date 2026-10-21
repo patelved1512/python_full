@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Favorites</title>
+</head>
+<body>
+
+    <h2>Favorite Restaurants</h2>
+
+    <input type="text" id="restaurant" placeholder="Restaurant name">
+    <button onclick="addRestaurant()">Add</button>
+    <button onclick="clearFavorites()">Clear Favorites</button>
+
+    <ul id="restaurantList"></ul>
+
+    <script>
+        let restaurants = JSON.parse(
+            localStorage.getItem("restaurants")
+        ) || [];
+
+        function displayRestaurants() {
+            let list = document.getElementById("restaurantList");
+            list.innerHTML = "";
+
+            for (let i = 0; i < restaurants.length; i++) {
+                let li = document.createElement("li");
+                li.innerHTML = restaurants[i];
+                list.appendChild(li);
+            }
+        }
+
+        function addRestaurant() {
+            let name = document.getElementById("restaurant").value;
+
+            if (name == "") {
+                return;
+            }
+
+            restaurants.push(name);
+
+            localStorage.setItem(
+                "restaurants",
+                JSON.stringify(restaurants)
+            );
+
+            document.getElementById("restaurant").value = "";
+            displayRestaurants();
+        }
+
+        function clearFavorites() {
+            localStorage.removeItem("restaurants");
+
+            restaurants = [];
+
+            displayRestaurants();
+        }
+
+        displayRestaurants();
+    </script>
+
+</body>
+</html>

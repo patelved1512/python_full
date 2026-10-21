@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+function validateURL(url) {
+    if (!url.startsWith("https://open.spotify.com/")) {
+        throw new Error("Invalid Spotify URL");
+    }
+}
+
+function playSong() {
+    validateURL("https://example.com/song");
+}
+
+playSong();
+
+
+
+function divide(a, b) {
+    if (b === 0) {
+        throw new Error("Cannot divide by zero");
+    }
+
+    return a / b;
+}
+
+try {
+    divide(10, 0);
+} catch (error) {
+    console.log(error.stack);
+}
+
+/*
+Stack trace explanation:
+The error occurs because the function receives zero
+as the divisor. The Error object identifies the
+problem and its stack trace shows where the error
+was thrown and which function calls led to it.
+*/
+
+    </script>
+</body>
+</html>

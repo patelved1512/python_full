@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Order Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 450px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        input,
+        button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #errorMessage {
+            color: red;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>🍕 Live Order Form</h2>
+
+        <form id="orderForm">
+            <label for="dishName">Dish Name:</label>
+            <input type="text" id="dishName" placeholder="Enter dish name">
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" placeholder="Enter quantity" min="1">
+
+            <button type="submit" id="addButton">
+                Add to Cart
+            </button>
+
+            <p id="errorMessage" role="alert"></p>
+        </form>
+
+        <h3>🛒 Your Cart</h3>
+        <ul id="cartList"></ul>
+    </div>
+
+    <script>
+        const orderForm = document.getElementById("orderForm");
+        const dishName = document.getElementById("dishName");
+        const quantity = document.getElementById("quantity");
+        const cartList = document.getElementById("cartList");
+        const errorMessage = document.getElementById("errorMessage");
+
+
+        orderForm.addEventListener("submit", function (event) {
+
+
+            event.preventDefault();
+
+            const dish = dishName.value.trim();
+            const qty = quantity.value.trim();
+
+
+            if (dish === "" || qty === "" ||
+                !Number.isInteger(Number(qty)) ||
+                Number(qty) < 1) {
+
+                errorMessage.textContent =
+                    "Please enter a dish name and a valid quantity (at least 1).";
+
+                return;
+            }
+
+
+            errorMessage.textContent = "";
+
+            const li = document.createElement("li");
+            li.textContent = `${dish} - Quantity: ${qty}`;
+
+
+            cartList.appendChild(li);
+
+
+            dishName.value = "";
+            quantity.value = "";
+
+
+            dishName.focus();
+        });
+    </script>
+
+</body>
+
+</html>

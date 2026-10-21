@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recent Searches</title>
+</head>
+<body>
+
+    <h2>Save Recent Search</h2>
+
+    <script>
+        function saveRecentSearch(query) {
+            let searches = JSON.parse(
+                localStorage.getItem("recentSearches")
+            ) || [];
+
+            searches.push(query);
+
+            localStorage.setItem(
+                "recentSearches",
+                JSON.stringify(searches)
+            );
+        }
+
+        saveRecentSearch("Biryani");
+        saveRecentSearch("Sneakers");
+
+        console.log(localStorage.getItem("recentSearches"));
+    </script>
+
+</body>
+</html>

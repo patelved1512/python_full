@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button id="like">Like  0</button>
+
+    <script>
+        let count = 0;
+
+        document.getElementById("like").addEventListener("click", function() {
+            count++;
+
+            document.getElementById("like").innerHTML =
+                "Like  " + count;
+        });
+    </script>
+
+</body>
+</html>

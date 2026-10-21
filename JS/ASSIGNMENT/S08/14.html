@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Orders</title>
+</head>
+<body>
+
+    <h2>Order Details</h2>
+
+    <script>
+        let orders = [
+            {
+                orderId: 101,
+                items: [
+                    { itemName: "Pizza", price: 250 },
+                    { itemName: "Burger", price: 150 }
+                ],
+                delivery: {
+                    address: "Ahmedabad",
+                    status: "Delivered"
+                }
+            },
+            {
+                orderId: 102,
+                items: [
+                    { itemName: "Sandwich", price: 100 },
+                    { itemName: "Fries", price: 80 }
+                ],
+                delivery: {
+                    address: "Naroda",
+                    status: "Pending"
+                }
+            }
+        ];
+
+        for (let i = 0; i < orders.length; i++) {
+            let total = 0;
+
+            for (let j = 0; j < orders[i].items.length; j++) {
+                total = total + orders[i].items[j].price;
+            }
+
+            console.log("Order ID:", orders[i].orderId);
+            console.log("Total Price:", total);
+        }
+    </script>
+
+</body>
+</html>

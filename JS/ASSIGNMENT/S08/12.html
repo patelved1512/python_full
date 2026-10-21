@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Ratings</title>
+</head>
+<body>
+
+    <h2>Movie IMDb Ratings</h2>
+
+    <script>
+        let movies = [
+            {
+                title: "3 Idiots",
+                year: 2009,
+                rating: {
+                    imdb: 8.4,
+                    rottenTomatoes: 100
+                }
+            },
+            {
+                title: "Jawan",
+                year: 2023,
+                rating: {
+                    imdb: 6.9,
+                    rottenTomatoes: 89
+                }
+            },
+            {
+                title: "Dangal",
+                year: 2016,
+                rating: {
+                    imdb: 8.3,
+                    rottenTomatoes: 88
+                }
+            }
+        ];
+
+        for (let i = 0; i < movies.length; i++) {
+            console.log("Movie:", movies[i].title);
+            console.log("IMDb Rating:", movies[i].rating.imdb);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Zomato Menu</title>
+    <style>
+        .menu-item {
+            background-color: #fff5f5;
+            border: 1px solid #e23744;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            width: 250px;
+            font-family: Arial, sans-serif;
+        }
+
+        .food-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .food-price {
+            font-size: 16px;
+            color: green;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="color: #e23744;">🍽️ Zomato Menu</h1>
+
+    <script>
+        function showMenuItem(name, price) {
+            let div = document.createElement("div");
+
+            div.className = "menu-item";
+
+            div.innerHTML = `
+                <div class="food-name">${name}</div>
+                <div class="food-price">₹${price}</div>
+            `;
+
+            return div;
+        }
+
+        document.body.appendChild(showMenuItem("Margherita Pizza", 199));
+        document.body.appendChild(showMenuItem("Veg Burger", 129));
+        document.body.appendChild(showMenuItem("Paneer Tikka", 249));
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 18 - Debugging & Developer Tools</title>
+</head>
+<body>
+    <h1>Session 18: Debugging & Developer Tools Tasks</h1>
+
+    <script>
+        // ==========================================
+        // Task 1 & 2: Instagram mock notifications
+        // ==========================================
+        console.log("--- Task 1 & 2: Console log, warn, error ---");
+        console.log("Post uploaded successfully!"); // success log
+        console.warn("Warning: Caption is missing for this post!"); // missing caption warning
+        console.error("Error: Image upload failed due to network timeout!"); // upload error
+
+
+        // ==========================================
+        // Task 3: 5 Songs array using console.table()
+        // ==========================================
+        console.log("\n--- Task 3: Songs Table ---");
+        const songs = [
+            { title: "Bohemian Rhapsody", artist: "Queen", duration: "5:55" },
+            { title: "Imagine", artist: "John Lennon", duration: "3:04" },
+            { title: "Hotel California", artist: "Eagles", duration: "6:30" },
+            { title: "Shape of You", artist: "Ed Sheeran", duration: "3:53" },
+            { title: "Blinding Lights", artist: "The Weeknd", duration: "3:20" }
+        ];
+        console.table(songs);
+
+
+        // ==========================================
+        // Task 4 & 5: 5 Zomato Food Orders using console.table()
+        // ==========================================
+        console.log("\n--- Task 4 & 5: Zomato Orders Dashboard ---");
+        const foodOrders = [
+            { orderId: 101, itemName: "Paneer Butter Masala", price: 280 },
+            { orderId: 102, itemName: "Chicken Biryani", price: 350 },
+            { orderId: 103, itemName: "Garlic Naan", price: 60 },
+            { orderId: 104, itemName: "Veg Hakka Noodles", price: 210 },
+            { orderId: 105, itemName: "Chocolate Brownie", price: 150 }
+        ];
+        console.table(foodOrders);
+
+
+        // ==========================================
+        // Task 6: addToCart(productName, quantity)
+        // ==========================================
+        console.log("\n--- Task 6: addToCart messages ---");
+        function addToCart(productName, quantity) {
+            if (quantity > 0) {
+                console.log(`Success: Added ${quantity} of "${productName}" to cart.`);
+            } else if (quantity === 0) {
+                console.warn(`Warning: Cannot add "${productName}" because quantity is 0.`);
+            } else {
+                console.error(`Error: Invalid quantity ${quantity} for "${productName}". Quantity cannot be negative!`);
+            }
+        }
+
+        addToCart("T-Shirt", 2);  // triggers console.log
+        addToCart("Cap", 0);      // triggers console.warn
+        addToCart("Shoes", -1);   // triggers console.error
+
+
+        // ==========================================
+        // Task 7 & 8: addToCart with debugger / breakpoint
+        // ==========================================
+        console.log("\n--- Task 7 & 8: addToCart Breakpoint Demonstration ---");
+        function addToCartWithBreakpoint(item, quantity) {
+            // Chrome DevTools Sources tab theke breakpoint set kora jay
+            // 'debugger;' keyword execution-ke eikhane pause korbe
+            debugger; 
+
+            if (quantity === 0) {
+                throw new Error(`Cart error: Quantity for ${item} cannot be 0!`);
+            }
+            console.log(`Added ${quantity} of ${item}`);
+        }
+
+        try {
+            addToCartWithBreakpoint("Jeans", 0);
+        } catch (err) {
+            console.error("Caught expected error for Task 7 & 8:", err.message);
+        }
+
+
+        // ==========================================
+        // Task 9: Loop over friends array with breakpoint
+        // ==========================================
+        console.log("\n--- Task 9: Friends Loop Debugger ---");
+        const friends = ["Rahul", "Priya", "Amit", "Sneha"];
+        for (let i = 0; i < friends.length; i++) {
+            // Sources tab-e F10 diye step over ebong F8 diye continue korte paren
+            const friendName = friends[i];
+            console.log(`Friend ${i + 1}: ${friendName}`);
+        }
+
+
+        // ==========================================
+        // Task 10 & 11: Call Stack Trace (Order Processing)
+        // ==========================================
+        console.log("\n--- Task 10 & 11: Stack Trace Analysis ---");
+        function placeOrder() {
+            confirmOrder();
+        }
+
+        function confirmOrder() {
+            processPayment();
+        }
+
+        function processPayment() {
+            throw new Error("Payment failed");
+        }
+
+        try {
+            placeOrder();
+        } catch (error) {
+            console.error("Task 10 & 11 Stack Trace Output:");
+            console.error(error.stack);
+            // Stack Trace dekhe bojha jay:
+            // Error ghotechhe processPayment() function-e, jar caller confirmOrder() ebong root caller placeOrder()
+        }
+
+
+        // ==========================================
+        // Task 12: Broken getUser() Stack Trace
+        // ==========================================
+        console.log("\n--- Task 12: JSON parse bug stack trace ---");
+        function getUser() {
+            return fetchUser();
+        }
+
+        function fetchUser() {
+            return JSON.parse(undefined); // Throws SyntaxError
+        }
+
+        try {
+            getUser();
+        } catch (error) {
+            console.error("Task 12 Error & Stack Trace:");
+            console.error(error.stack);
+            // Error-causing function: fetchUser()
+            // Karon: JSON.parse(undefined) valid JSON noy
+        }
+
+
+        // ==========================================
+        // Task 13, 14 & 15: Error explanation note
+        // ==========================================
+        console.log("\n--- Tasks 13, 14 & 15: Explanation Summary ---");
+        console.log("Error: 'SyntaxError: \"undefined\" is not valid JSON'");
+        console.log("Meaning: fetchUser()-e JSON.parse() ekti string expect kore, kintu undefined deoya hoyeche.");
+        console.log("Fix: Fetch korar somoy data undefined kina check kora, jemon: if(data) return JSON.parse(data);");
+    </script>
+</body>
+</html>

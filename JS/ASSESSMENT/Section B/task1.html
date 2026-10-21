@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const restaurantName = "Spice Garden";
+        const cuisineType = "Indian";
+        const averageRating = 4.5;
+        let isOpen = true;
+
+
+        const status = isOpen ? "Open Now" : "Closed";
+
+        const profile = `${restaurantName} | ${cuisineType} | Rating: ${averageRating} | ${status}`;
+
+
+        console.log(profile);
+
+
+        const restaurantDetails = {
+            restaurantName: restaurantName,
+            cuisineType: cuisineType,
+            averageRating: averageRating,
+            isOpen: isOpen
+        };
+
+        const jsonString = JSON.stringify(restaurantDetails);
+
+
+        console.log(jsonString);
+    </script>
+</body>
+
+</html>

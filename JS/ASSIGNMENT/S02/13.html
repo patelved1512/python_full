@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function showProfile(name, followers, isPremium) {
+            console.log("Name:", name);
+            console.log("Is Premium:", isPremium);
+
+            followers = "One thousand";
+            console.log("Followers:", followers);
+            console.log("Type:", typeof followers);
+
+            followers = 1000;
+            console.log("Followers:", followers);
+            console.log("Type:", typeof followers);
+        }
+
+        showProfile("Arya", 500, true);
+    </script>
+</body>
+
+</html>

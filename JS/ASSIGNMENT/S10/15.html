@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Followers Summary</title>
+</head>
+<body>
+
+    <h2>Followers Summary</h2>
+
+    <script>
+        const getFollowersSummary = (...followers) => {
+            let total = 0;
+
+            for (let i = 0; i < followers.length; i++) {
+                total = total + followers[i];
+            }
+
+            return `Total followers: ${total}`;
+        };
+
+        console.log(getFollowersSummary(400, 300, 500));
+    </script>
+
+</body>
+</html>
